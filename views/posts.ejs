@@ -1,0 +1,40 @@
+<% layout("/layouts/boilerplate.ejs") %>
+    <br> <br> <br>
+    <h3 class="post-header"><b><i>DONATE AND HELP</i></b>
+    </h3>
+    <div class="container">
+        <div class="row">
+            <% for (post of posts) { %>
+                <div class="col-sm-12 postOffsetter">
+                    <div class="ownCard">
+                        <h5 class="card-title">
+                            <b>Title: </b>
+                            <%= post.title %>
+                        </h5>
+                        <p class="card-text"><b>Blood Group:</b>
+                            <%= post.bloodGroup %>
+                        </p>
+                        <p class="card-text"><b>Description:</b>
+                            <%= post.description %>
+                        </p>
+                        <p class="card-text"><b>Patient Type:</b>
+                            <%= post.patientType %>
+                        </p>
+                        <p class="card-text"><b>Phone No:</b>
+                            <%= post.phone %>
+                        </p>
+                    </div>
+                    <div>
+                        <img class="post-img" src="<%= postPicture %>" alt="Card image cap">
+                    </div>
+                </div>
+                <br>
+                <div class="container mt-2 mb-4" style="text-align: center;">
+                    <a href="http://localhost:8080/home/posts/:id" class="btn btn-danger"
+                        style="text-align: center;">Show details</a>
+                    <!-- Replace '#' with your actual link URL -->
+                </div>
+                <hr>
+                <% } %>
+        </div>
+    </div>

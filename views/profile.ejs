@@ -1,0 +1,63 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body>
+
+        <div class="container marginProfile-top">
+            <h2 class="ProfileheaderStyle"><b><i>Blood Donor Profile</i></b></h2>
+
+            <div class="profile-card">
+                <div>
+                    &nbsp; &nbsp; &nbsp; &nbsp; <img style="padding: 15px 0 0 0;" class="profileImageStyle"
+                        src=<%=profilePicture %>
+                    alt="Profile Image">
+                    <hr style="border: 1px solid #403e3e;">
+                    <h5 style="padding: 0 25px;" class="card-title mt-1">Name: <%= profile.name %>
+                    </h5>
+                    <p style="padding: 0 25px;" class="card-title mt-1">
+                        <strong>Username:</strong>
+                        <%= profile.username %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Email:</strong>
+                        <%= profile.email %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Blood Group:</strong>
+                        <%= profile.bloodgroup %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Weight:</strong>
+                        <%= profile.Weight %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Phone:</strong>
+                        <%= profile.phone %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Gender:</strong>
+                        <%= profile.gender %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Age:</strong>
+                        <%= profile.age %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Donor:</strong>
+                        <%= ( profile.doner=='false' ) ?'No':'Yes' %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Division:</strong>
+                        <%= profile.division %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>District:</strong>
+                        <%= profile.district %>
+                    </p>
+                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Contribution:</strong>
+                        <%= profile.contribution %>
+                    </p>
+                    <br>
+                    <% if (LoggedIn && LoggedIn.username==profile.username) { %>
+                        &nbsp; &nbsp; &nbsp; <a href="#" class="btn btn-danger mb-3">Edit Profile</a>
+                        <% } else { %>
+                            <form action="/home/profile/<%=profile.username%>/message" method="GET">
+                                &nbsp; &nbsp; &nbsp;
+                                <button type="submit" class="btn btn-danger mb-3">Send Message</button>
+                            </form>
+                            <% } %>
+                                <br>
+                </div>
+            </div>
+        </div>
+    </body>
