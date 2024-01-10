@@ -1,0 +1,63 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body style="margin-top: 100px">
+        <div class=" mt-5 loginStyle">
+            <div class="row justify-content-center">
+                <div>
+                    <h3 style="background-color: #BE232B; color:white;padding: 7px 0px; border: 2px solid gray;"
+                        class="text-center">
+                        <b>Create A Post For search Doner</b>
+                    </h3>
+                    <form action="/home/posts/new" method="post">
+                        <div class="form-group mt-3 loginFormStyle">
+                            <label for="title"><b>&nbsp;Title:</b></label>
+                            <input type="text" placeholder="title" class="form-control" id="title" name="title"
+                                required>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="bloodGroup"><b>&nbsp;Blood Group:</b></label>
+                            <select class="form-control" id="bloodGroup" name="bloodGroup" required>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="description"><b>&nbsp;Description:</b></label>
+                            <textarea class="form-control" placeholder="enter description" id="description"
+                                name="description" rows="4" required></textarea>
+                        </div>
+
+                        <!-- <div class="form-group mt-2 loginFormStyle">
+                            <label for="imageLink"><b>&nbsp;Image Link:</b></label>
+                            <input type="text" placeholder="image link" class="form-control" id="imageLink"
+                                name="imageLink">
+
+                        </div> -->
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="patientType"><b>&nbsp;Patient Type:</b></label>
+                            <select class="form-control" id="patientType" name="patientType">
+                                <option value="Delivery Patient">Delivery Patient</option>
+                                <option value="Accident Patient">Accident Patient</option>
+                                <option value="Cancer Patient">Cancer Patient</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="phone"><b>&nbsp;Phone Number:</b></label>
+                            <input type="text" placeholder="017973994.." class="form-control" id="phone" name="phone">
+
+                        </div>
+                        <button type="submit" class="btn loginBtn">Create Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>

@@ -1,0 +1,30 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body style="margin-top: 100px">
+        <div class=" mt-5 loginStyle">
+            <div class="row justify-content-center">
+                <div>
+                    <h3 style="background-color: #BE232B; color:white;padding: 7px 0px; border: 2px solid gray;"
+                        class="text-center">
+                        <b>Login into BsmrstuBloodBank</b>
+                    </h3>
+                    <!-- <hr style="border: 1px solid #141212;"> -->
+                    <form action="/home/login" method="POST">
+                        <div class="form-group mt-3 loginFormStyle">
+                            <label for="username"><b>&nbsp;Handle/Username:</b></label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Enter Username" required>
+                        </div>
+                        <div class="form-group loginFormStyle">
+                            <label for="password" class="mt-2"><b>&nbsp;Password:</b></label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Enter Password" required>
+                        </div>
+                        <button type="submit" class="btn loginBtn">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br> <br>
+
+    </body>
