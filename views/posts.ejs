@@ -32,10 +32,10 @@
                     </div>
                 </div>
                 <br>
-                <div class="container mt-2 mb-4" style="text-align: center;">
-                    <a href="http://localhost:8080/home/posts/:id" class="btn btn-danger"
-                        style="text-align: center;">Edit Posts</a>
-                    <!-- Replace '#' with your actual link URL -->
+                <div class="container mt-3 mb-4" style="text-align: center;">
+                    <form action="/home/posts/edit/<%= post.username %>" method="GET">
+                        <button class="btn btn-danger">Edit Post</button>
+                    </form>
                 </div>
                 <hr>
                 <% } %>

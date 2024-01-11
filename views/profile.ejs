@@ -53,6 +53,10 @@
                             &nbsp; &nbsp; &nbsp;
                             <button type="submit" class="btn btn-danger mb-3">Edit Profile</button>
                         </form>
+                        <form action="/home/showmsg/<%=profile.username%>" method="GET">
+                            &nbsp; &nbsp; &nbsp;
+                            <button type="submit" class="btn btn-danger mb-3">Views My Talks</button>
+                        </form>
                         <% } else { %>
                             <form action="/home/profile/<%=profile.username%>/message" method="GET">
                                 &nbsp; &nbsp; &nbsp;

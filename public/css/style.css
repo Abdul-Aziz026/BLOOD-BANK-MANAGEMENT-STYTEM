@@ -401,7 +401,7 @@ td {
 
 .MessageTableStyle {
     border: 1px solid hsla(0, 1%, 38%, 0.3) !important;
-    text-align: center;
+    /* text-align: center; */
 } 
 
 @media (max-width: 800px) {

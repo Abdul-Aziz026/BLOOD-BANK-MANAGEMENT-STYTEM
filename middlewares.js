@@ -1,6 +1,6 @@
 const isLoggedIn = (req, res, next)=>{
     if (!req.isAuthenticated()) {
-        req.flash("error", "Please Login for create Post");
+        req.flash("error", "Please LoginIn");
         return res.redirect("/home/login");
     }
     next();

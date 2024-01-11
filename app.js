@@ -168,6 +168,16 @@ app.get("/home/profile/:username", isLoggedIn, async(req, res) => {
     }
 });
 
+app.get("/home/showmsg/:username", isLoggedIn, async(req, res)=>{
+    const username = req.params.username;
+    const betweenMessages = await Message.find({
+        $or: [
+            { sender: username },
+            { receiver: username }
+        ]
+    });
+    res.render("showMsg.ejs", {betweenMessages});
+});
 
 // send message and show message...
 app.get("/home/profile/:username/message", isLoggedIn, async(req, res) => {
@@ -281,7 +291,51 @@ app.get("/home/profile", isLoggedIn, async(req, res)=>{
     }
 });
 
-
+app.get("/home/posts/edit/:username", isLoggedIn, async(req, res)=>{
+    try {
+        const username = req.params.username;
+        if (req.user.username === username) {
+            const editPost = await Post.findOne({username: username});
+            // res.send("hello");
+            // console.log("form data: ", editPost);
+            // res.send(editPost);
+            res.render("editPost.ejs", {editPost});
+        }
+        else {
+            req.flash("error", "You are not the author of this Post...");
+            res.redirect("/home/posts");
+        }
+    }
+    catch(err) {
+        console.log(req.user);
+        res.send('error');
+    }
+});
+app.post("/home/posts/edit/:username", isLoggedIn, async(req, res)=>{
+    // res.send("Post updated");
+    const username = req.params.username;
+    try {
+        if (req.user.username === username) {
+            const Profile = req.body;
+            Profile.username = username;
+            // res.send(Profile);
+            const editPost = await Post.findOne({username: username});
+            await Post.findByIdAndUpdate(editPost._id, Profile);
+            // res.send("hello");
+            // console.log("form data: ", editPost);
+            // res.send(editPost);
+            res.redirect("/home/posts");
+        }
+        else {
+            req.flash("error", "You are not the author of this Post...");
+            res.redirect("/home/posts");
+        }
+    }
+    catch(err) {
+        req.flash("error", "Some thing Wrong happened...");
+        res.redirect("/home/posts");
+    }
+});
 
 // create post
 app.get("/home/posts/new", isLoggedIn, (req, res)=>{
@@ -325,7 +379,7 @@ app.post("/home/posts/new", isLoggedIn, async(req, res)=>{
 app.get("/home/posts", async (req, res)=>{
     const posts = await Post.find();
     const postPicture = process.env.DEFAULT_POST_IMAGE;
-    console.log(posts);
+    // console.log(posts);
     res.render("posts.ejs", { posts, postPicture });
 });
 
@@ -365,6 +419,10 @@ app.post("/home/search", async (req, res) => {
 
 app.get("/home/:id/Message", (req, res)=>{
     res.render("sendMessage.ejs");
+});
+
+app.use("*", (req, res)=>{
+    res.send("404: Page not Found");
 })
 
 
