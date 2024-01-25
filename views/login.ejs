@@ -10,6 +10,13 @@
                     </h3>
                     <!-- <hr style="border: 1px solid #141212;"> -->
                     <form action="/home/login" method="POST">
+                        <div style="text-align: center;">
+                            <select class="btn loginUserStyle" id="userType" name="userType">
+                                <option>Admin_Login</option>
+                                <option>Doner_Login</option>
+                                <option>User_Login</option>
+                            </select>
+                        </div>
                         <div class="form-group mt-3 loginFormStyle">
                             <label for="username"><b>&nbsp;Handle/Username:</b></label>
                             <input type="text" class="form-control" id="username" name="username"

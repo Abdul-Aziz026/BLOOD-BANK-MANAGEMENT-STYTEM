@@ -352,6 +352,13 @@ td {
 }
 
 /* login page style */
+
+.loginUserStyle {
+    background-color: #BE232B !important;
+    color: white !important;
+    text-align: center;
+}
+
 .loginStyle {
     border: 1px solid rgb(156, 155, 155); margin-left: 20% !important; width: 60% !important;
     border-radius: 5px !important;
@@ -389,7 +396,7 @@ td {
     padding: 0.2rem 2rem !important;
     color: white !important;
     text-align: center !important;
-    margin-left: 40%;
+    margin-left: 43%;
 }
 
 .loginFormStyle {
@@ -537,4 +544,50 @@ td {
 }
 .FIND-NEAREST-BLOOD-BANK-TO-DONATE:hover{
     background-color: #2981C0;
+}
+
+/* mail style */
+.bgMail {
+    background-color: #eee8e8 !important;
+}
+
+.mailBodyMediaQuery {
+    width: 60vw !important;
+}
+
+@media (max-width: 1000px) {
+    .mailBodyMediaQuery {
+        width: 70vw !important;
+    }
+}
+@media (max-width: 900px) {
+    .mailBodyMediaQuery {
+        width: 75vw !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .mailBodyMediaQuery {
+        width: 80vw !important;
+    }
+}
+@media (max-width: 700px) {
+    .mailBodyMediaQuery {
+        width:  90vw !important;
+    }
+}
+@media (max-width: 600px) {
+    .mailBodyMediaQuery {
+        width: 95vw !important;
+    }
+}
+@media (max-width: 600px) {
+    .mailBodyMediaQuery {
+        width: 95vw !important;
+    }
+}
+@media (max-width: 500px) {
+    .mailBodyMediaQuery {
+        width: 100vw !important;
+    }
 }

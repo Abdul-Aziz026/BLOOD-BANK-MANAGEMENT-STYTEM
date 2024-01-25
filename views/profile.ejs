@@ -62,8 +62,14 @@
                                 &nbsp; &nbsp; &nbsp;
                                 <button type="submit" class="btn btn-danger mb-3">Send Message</button>
                             </form>
-                            <% } %>
-                                <br>
+                            <% if (userType && userType=='Admin_Login' ) { %>
+                                <form action="/home/profile/<%=profile.username%>/mail" method="GET">
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button type="submit" class="btn btn-danger mb-3">Send Mail</button>
+                                </form>
+                                <% } %>
+                                    <% } %>
+                                        <br>
                 </div>
             </div>
         </div>
