@@ -4,6 +4,39 @@
     width: 90%;
 } */
 
+/* post page text image  */
+.post-Text-Img {
+    background-color: #BE2333;
+    text-align: center;
+    font-size: 2rem;
+    display: flex;
+    /* height: 150px; */
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    color: #ffffff;
+}
+.Text-Post {
+    width: 70vw;
+}
+.Icon-Post {
+    font-size: 4rem;
+}
+
+/* home image custom style  */
+.homeImage{
+    text-align: center;
+    display: flex;
+    background-color: #c11627;
+    color: white;
+}
+.Text {
+    width: 85vw;
+    font-size: 2rem;
+    padding: 1rem 1.5rem;
+}
+.Font{
+    font-size: 6rem;
+    margin: 0 auto;
+}
 
 /* navber style */
 .navbar {
