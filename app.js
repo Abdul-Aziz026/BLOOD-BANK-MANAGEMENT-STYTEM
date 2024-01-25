@@ -74,6 +74,7 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     // console.log("come here", res.locals.success, res.locals.error);
     res.locals.LoggedIn = req.user;
+    if (res.locals.userType==undefined) res.locals.userType = 'Admin_Login'; 
     // console.log(req.user);
     next();
 });
@@ -101,7 +102,12 @@ app.post("/home/login",
         failureFlash: true 
     }),
     (req, res) =>{
+        // console.log(req.user);
+        // req.user.userType = req.body.userType;
+        // return res.send(req.user.userType);
         res.locals.LoggedIn = req.user;
+        res.locals.userType = req.body.userType;
+        // console.log(req.user);
         // console.log(connect.sid.value);
         req.flash("success", "You are logged in!!!");
         res.redirect("/home");
@@ -239,6 +245,26 @@ app.post("/home/profile/:username/message", isLoggedIn, async (req, res) => {
     };
 });
 
+
+/* Mail send Route */
+app.get("/home/profile/:username/mail", isLoggedIn, async(req, res) => {
+    const sender = req.user.username;
+    const receiver = req.params.username;
+    // console.log("sender & receiver", sender, receiver);
+    res.render("sendMail.ejs", {sender, receiver});
+});
+
+app.post("/home/profile/:username/mail", isLoggedIn, async (req, res) => {
+    const sender = req.user.username;
+    const receiver = req.params.username;
+    const senderMail = req.user.email;
+    const {email} = await Profile.findOne({username: receiver});
+    const subject = req.body.mailSubject;
+    const mailMessage = req.body.mailMessage;
+    req.flash("success", "Successfully Send Mail...!!!");
+    res.redirect(`/home/profile/${receiver}`);
+    // return res.send({senderMail, receiverMail, subject, mailSubject});
+});
 
 // signup get route...
 app.get("/home/signUp", (req, res)=>{
