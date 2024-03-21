@@ -8,6 +8,8 @@ dotenv.config();
 const session = require("express-session");
 const flash = require("connect-flash");
 const isLoggedIn = require("./middlewares.js");
+// email sender npm
+const nodemailer = require("nodemailer");
 
 // passport ....
 const passport = require("passport");
@@ -28,10 +30,9 @@ app.use(express.static(path.join(__dirname, "/public")));
 // use ejs-locals for all ejs templates:
 app.engine('ejs', ejsMate);
 
-// mongo connection check
 app.use(express.urlencoded({extended: true}));
 
-
+// mongo connection check
 const MONGO_URL = process.env.MONGO_URL;
 
 main()
@@ -153,7 +154,7 @@ app.get("/home/profile/:username", isLoggedIn, async(req, res) => {
     try {
         const sender = req.user.username;
         const receiver = req.params.username;
-        console.log("receiver===> ", receiver, "sender===> ", sender);
+        // console.log("receiver===> ", receiver, "sender===> ", sender);
         const profile = await Profile.findOne({username: receiver});
         // console.log("Profile:=== ", profile);
         // res.send("ok");
@@ -235,12 +236,12 @@ app.post("/home/profile/:username/message", isLoggedIn, async (req, res) => {
               { $and: [{ sender: receiver }, { receiver: sender }] }
             ]
         });
-        console.log(betweenMessages[0].createdAt);
+        // console.log(betweenMessages[0].createdAt);
         res.render("sendMessage.ejs", {sender, receiver, betweenMessages});
     }
     catch (err){
         console.log("some error occur: ", err);
-        req.flash("error", "err");
+        req.flash("error", "something wrong happen");
         res.redirect(`/home/profile/${req.params.username}/message`);
     };
 });
@@ -255,15 +256,44 @@ app.get("/home/profile/:username/mail", isLoggedIn, async(req, res) => {
 });
 
 app.post("/home/profile/:username/mail", isLoggedIn, async (req, res) => {
-    const sender = req.user.username;
     const receiver = req.params.username;
     const senderMail = req.user.email;
     const {email} = await Profile.findOne({username: receiver});
     const subject = req.body.mailSubject;
     const mailMessage = req.body.mailMessage;
-    req.flash("success", "Successfully Send Mail...!!!");
+    
+    // Create a Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        auth: {
+            user: 'conor.kerluke@ethereal.email',
+            pass: 'tqvQTaYZJgcSGxbfDC'
+        }
+    });
+    const mailOptions = {
+        // from: senderMail,//senderemail
+        from: 'azizulcsebsmrstu@gmail.com',//senderemail
+        // to: email,//receiver email
+        to: 'azizurcsebsmrstu@gmail.com',//receiver email
+        subject: subject,
+        text: mailMessage
+    };
+
+
+    // Send the email
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Message sent: ", info);
+        req.flash("success", "Successfully Sent Email!!!");
+    } catch (error) {
+        // console.log("Error sending email: ", error);
+        req.flash("error", "Email Not sent...!!!");
+    }
     res.redirect(`/home/profile/${receiver}`);
-    // return res.send({senderMail, receiverMail, subject, mailSubject});
+    // https://nodemailer.com/
+    // mailbox link: https://ethereal.email/create
+    // https://ethereal.email/messages
 });
 
 // signup get route...
