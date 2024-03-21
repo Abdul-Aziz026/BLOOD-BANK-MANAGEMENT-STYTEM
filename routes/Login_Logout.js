@@ -103,6 +103,4 @@ router.post("/home/signup", async(req, res)=>{
     }
 });
 
-
-
 module.exports = router;
