@@ -91,6 +91,10 @@ app.get("/logout", (req, res, next)=>{
     })
 });
 
+// Routes router working test...
+const ProfileTest = require('./routes/profile.js');
+app.use('/', ProfileTest);
+
 
 
 app.get("/home/login", (req, res)=>{
