@@ -32,17 +32,8 @@ app.engine('ejs', ejsMate);
 
 app.use(express.urlencoded({extended: true}));
 
-// mongo connection check
-const MONGO_URL = process.env.MONGO_URL;
-
-main()
-.then(() => console.log("connection Successfull in database."))
-.catch((err) => {
-    console.log(err)
-});
-async function main() {
-  await mongoose.connect(MONGO_URL);
-}
+// check Mongo Connection...
+const checkMongoConnection = require("./databaseConnection.js");
 
 // passport middle wares...
 const sessionOptions = {
@@ -80,44 +71,14 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/logout", (req, res, next)=>{
-    req.logout((err)=>{
-        if (err) {
-            next(err);
-        }
-        res.locals.LoggedIn = false,
-        req.flash("success", "You are Logged Out!!!");
-        res.redirect("/home");
-    })
-});
 
 // Routes router working test...
 const ProfileTest = require('./routes/profile.js');
-app.use('/', ProfileTest);
+app.use('/test/abdul', ProfileTest);
 
-
-
-app.get("/home/login", (req, res)=>{
-    res.render("login.ejs");
-});
-
-app.post("/home/login", 
-    passport.authenticate('local', {
-        failureRedirect: '/home/login',
-        failureFlash: true 
-    }),
-    (req, res) =>{
-        // console.log(req.user);
-        // req.user.userType = req.body.userType;
-        // return res.send(req.user.userType);
-        res.locals.LoggedIn = req.user;
-        res.locals.userType = req.body.userType;
-        // console.log(req.user);
-        // console.log(connect.sid.value);
-        req.flash("success", "You are logged in!!!");
-        res.redirect("/home");
-    }
-);
+// Login logout signup route...
+const LoginLogoutSignUp = require("./routes/Login_Logout.js");
+app.use("/home", LoginLogoutSignUp);
 
 app.get("/home/:username/edit", isLoggedIn, async (req, res) => {
     try {
@@ -302,33 +263,6 @@ app.post("/home/profile/:username/mail", isLoggedIn, async (req, res) => {
     req.flash("success", "Successfully Send Mail...!!!");
     res.redirect(`/home/profile/${receiver}`);
     // return res.send({senderMail, receiverMail, subject, mailSubject});
-});
-
-// signup get route...
-app.get("/home/signUp", (req, res)=>{
-    res.render("signupform.ejs");
-});
-
-// signup post route...
-app.post("/home/signup", async(req, res)=>{
-    try{
-        const userSchema = new Profile(req.body);
-
-        // console.log(userSchema);
-        const registeredUser = await Profile.register(userSchema, req.body.password);
-        req.login(registeredUser, (err) => {
-            if (err) {
-                return next(err);
-            }
-            res.locals.LoggedIn = req.user;
-            req.flash("success", "Signup Successfully!!!");
-            res.redirect("/home");
-        });
-    }
-    catch(err) {
-        req.flash("error", "faliled of signup");
-        res.redirect("/home/signup");
-    }
 });
 
 app.get("/home", (req, res)=>{

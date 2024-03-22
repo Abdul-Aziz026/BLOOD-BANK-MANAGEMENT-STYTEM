@@ -9,16 +9,6 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const Profile = require("../models/userProfileSchema.js");
-const MONGO_URL = process.env.MONGO_URL;
-
-main()
-.then(() => console.log("connection Successfull in database."))
-.catch((err) => {
-    console.log(err)
-});
-async function main() {
-  await mongoose.connect(MONGO_URL);
-}
 
 // passport middle wares...
 const sessionOptions = {
@@ -45,8 +35,6 @@ passport.serializeUser(Profile.serializeUser());
 passport.deserializeUser(Profile.deserializeUser());
 
 
-
-
 router.get("/logout", (req, res, next)=>{
     req.logout((err)=>{
         if (err) {
@@ -59,6 +47,7 @@ router.get("/logout", (req, res, next)=>{
 });
 
 router.get("/login", (req, res)=>{
+    // res.send("good");
     res.render("login.ejs");
 });
 
@@ -68,21 +57,24 @@ router.post("/login",
         failureFlash: true 
     }),
     (req, res) =>{
+        // console.log(req.user);
+        // req.user.userType = req.body.userType;
+        // return res.send(req.user.userType);
         res.locals.LoggedIn = req.user;
+        res.locals.userType = req.body.userType;
+        // console.log(req.user);
         // console.log(connect.sid.value);
         req.flash("success", "You are logged in!!!");
         res.redirect("/home");
     }
 );
 
-
-// signup get route...
-router.get("/home/signUp", (req, res)=>{
+router.get("/signUp", (req, res)=>{
     res.render("signupform.ejs");
 });
 
 // signup post route...
-router.post("/home/signup", async(req, res)=>{
+router.post("/signup", async(req, res)=>{
     try{
         const userSchema = new Profile(req.body);
 
