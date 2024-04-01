@@ -256,16 +256,12 @@ app.get("/home/profile/:username/mail", isLoggedIn, async(req, res) => {
 });
 
 app.post("/home/profile/:username/mail", isLoggedIn, async (req, res) => {
-<<<<<<< HEAD
-=======
     const sender = req.user.username;
->>>>>>> d436f31f00d09bf23929b487296e28a5c72ff8fb
     const receiver = req.params.username;
     const senderMail = req.user.email;
     const {email} = await Profile.findOne({username: receiver});
     const subject = req.body.mailSubject;
     const mailMessage = req.body.mailMessage;
-<<<<<<< HEAD
     
     // Create a Nodemailer transporter
     const transporter = nodemailer.createTransport({
@@ -299,11 +295,9 @@ app.post("/home/profile/:username/mail", isLoggedIn, async (req, res) => {
     // https://nodemailer.com/
     // mailbox link: https://ethereal.email/create
     // https://ethereal.email/messages
-=======
     req.flash("success", "Successfully Send Mail...!!!");
     res.redirect(`/home/profile/${receiver}`);
     // return res.send({senderMail, receiverMail, subject, mailSubject});
->>>>>>> d436f31f00d09bf23929b487296e28a5c72ff8fb
 });
 
 // signup get route...
