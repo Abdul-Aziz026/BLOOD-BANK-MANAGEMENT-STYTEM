@@ -32,12 +32,12 @@
                         <a class="nav-link active backColor" href="/home/posts/new">CREATE A POST</a>
                         <!-- LoggedIn -->
                         <%if (!LoggedIn) {%>
-                            <a class="nav-link active backColor" href="/home/login">LOGIN</a>
-                            <a class="nav-link active backColor" href="/home/signUp">SIGNUP</a>
+                            <a class="nav-link active backColor" href="/auth/login">LOGIN</a>
+                            <a class="nav-link active backColor" href="/auth/signUp">SIGNUP</a>
                             <% } else {%>
-                                <a class="nav-link active backColor" href="/home/profile"><i class="fa-solid fa-user">
+                                <a class="nav-link active backColor" href="/profile"><i class="fa-solid fa-user">
                                     </i>&nbsp;PROFILE</a>
-                                <a class="nav-link active backColor" href="/logout">LOGOUT</a>
+                                <a class="nav-link active backColor" href="/auth/logout">LOGOUT</a>
                                 <% } %>
                     </div>
                 </div>

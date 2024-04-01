@@ -49,21 +49,21 @@
                     </p>
                     <br>
                     <% if (LoggedIn && LoggedIn.username==profile.username) { %>
-                        <form action="/home/<%=profile.username%>/edit" method="GET">
+                        <form action="/profile/<%=profile.username%>/edit" method="GET">
                             &nbsp; &nbsp; &nbsp;
                             <button type="submit" class="btn btn-danger mb-3">Edit Profile</button>
                         </form>
-                        <form action="/home/showmsg/<%=profile.username%>" method="GET">
+                        <form action="/message/<%=profile.username%>" method="GET">
                             &nbsp; &nbsp; &nbsp;
                             <button type="submit" class="btn btn-danger mb-3">Views My Talks</button>
                         </form>
                         <% } else { %>
-                            <form action="/home/profile/<%=profile.username%>/message" method="GET">
+                            <form action="/message/<%=profile.username%>/p2" method="GET">
                                 &nbsp; &nbsp; &nbsp;
                                 <button type="submit" class="btn btn-danger mb-3">Send Message</button>
                             </form>
-                            <% if (userType && userType=='Admin_Login' ) { %>
-                                <form action="/home/profile/<%=profile.username%>/mail" method="GET">
+                            <% if (true) { %>
+                                <form action="/sendMail/<%=profile.username%>" method="GET">
                                     &nbsp; &nbsp; &nbsp;
                                     <button type="submit" class="btn btn-danger mb-3">Send Mail</button>
                                 </form>
