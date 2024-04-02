@@ -95,10 +95,12 @@ app.use("/message", messageRouter);
 const mailsendRouter = require("./routes/mailsendRouter.js");
 app.use("/sendMail", mailsendRouter);
 
-
 // post Router
 const postRouter = require("./routes/postRouter.js");
 app.use("/posts", postRouter);
+
+const userRouter = require("./routes/userRouter");
+app.use("/users", userRouter);
 
 
 app.get("/home/posts/:id", (req, res)=>{

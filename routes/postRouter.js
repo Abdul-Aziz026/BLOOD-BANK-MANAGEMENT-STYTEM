@@ -24,22 +24,18 @@ router.post("/new", isLoggedIn, async(req, res)=>{
     try{
         const newPost = new Post(req.body);
         newPost.username = req.session.user.username;
-        // postMan.posts.push(newPost);
-        // save in Message collection table...
         const savePost = await newPost.save();
-        // save in Profile Collection table...
-        // await postMan.save();
         req.flash("success", "New Post created!!!");
-        res.redirect("/home");
+        res.redirect("/posts");
     }
     catch(err) {
         req.flash("error", "Post create failed!!!");
-        res.redirect("/home/posts/new");
+        res.redirect("/posts");
     }
 });
 
 
-router.get("/posts/edit/:id", isLoggedIn, async(req, res)=>{
+router.get("/edit/:id", isLoggedIn, async(req, res)=>{
     try {
         const id = req.params.id;
         const post = await Post.findOne({_id: id});
@@ -52,22 +48,27 @@ router.get("/posts/edit/:id", isLoggedIn, async(req, res)=>{
             req.flash("error", "You are not the author of this Post...");
             res.redirect("/posts");
         }
+        // res.send("ok");
     }
     catch(err) {
         console.log(req.user);
         res.send('error');
     }
 });
-router.post("posts/edit/:id", isLoggedIn, async(req, res)=>{
+router.post("/edit/:id", isLoggedIn, async(req, res)=>{
     // res.send("Post updated");
-    const id = req.params.id;
+    const Postid = req.params.id;
     try {
-        const post = await Post.findOne({_id: id});
+        // return res.send(req.body);
+        const post = await Post.findById(Postid);
         if (req.session.user.username === post.username) {
-            const cpost = req.session.body;
-            // res.send(Profile);
-            const editPost = await Post.findOne({_id: id});
-            await Post.findByIdAndUpdate(editPost._id, cpost);
+            // Create a new object excluding the _id field from req.body
+            const editPost = {...req.body};
+            // console.log(editPost);
+            delete editPost._id; // Exclude _id field from the update
+            editPost.username = req.session.user.username;
+            const updatedPost = await Post.findByIdAndUpdate(Postid, editPost, { new: true });
+            // console.log(updatedPost);
             res.redirect("/posts");
         }
         else {
@@ -76,8 +77,9 @@ router.post("posts/edit/:id", isLoggedIn, async(req, res)=>{
         }
     }
     catch(err) {
+        return res.send(err.message);
         req.flash("error", "Some thing Wrong happened...");
-        res.redirect("/home/posts");
+        res.redirect("/posts");
     }
 });
 

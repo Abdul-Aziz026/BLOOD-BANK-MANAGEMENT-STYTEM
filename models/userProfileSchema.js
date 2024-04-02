@@ -16,6 +16,10 @@ const profileSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    role: {
+        type: Number,
+        default: 3
+    },
     password: {
         type: String,
         required: true
