@@ -38,4 +38,47 @@ router.post("/new", isLoggedIn, async(req, res)=>{
     }
 });
 
+
+router.get("/posts/edit/:id", isLoggedIn, async(req, res)=>{
+    try {
+        const id = req.params.id;
+        const post = await Post.findOne({_id: id});
+        if (req.session.user.username === post.username) {
+            const editPost = await Post.findOne({_id: id});
+            // res.send(editPost);
+            res.render("editPost.ejs", {editPost});
+        }
+        else {
+            req.flash("error", "You are not the author of this Post...");
+            res.redirect("/posts");
+        }
+    }
+    catch(err) {
+        console.log(req.user);
+        res.send('error');
+    }
+});
+router.post("posts/edit/:id", isLoggedIn, async(req, res)=>{
+    // res.send("Post updated");
+    const id = req.params.id;
+    try {
+        const post = await Post.findOne({_id: id});
+        if (req.session.user.username === post.username) {
+            const cpost = req.session.body;
+            // res.send(Profile);
+            const editPost = await Post.findOne({_id: id});
+            await Post.findByIdAndUpdate(editPost._id, cpost);
+            res.redirect("/posts");
+        }
+        else {
+            req.flash("error", "You are not the author of this Post...");
+            res.redirect("/posts");
+        }
+    }
+    catch(err) {
+        req.flash("error", "Some thing Wrong happened...");
+        res.redirect("/home/posts");
+    }
+});
+
 module.exports = router;

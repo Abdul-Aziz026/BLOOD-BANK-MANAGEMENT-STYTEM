@@ -100,51 +100,6 @@ app.use("/sendMail", mailsendRouter);
 const postRouter = require("./routes/postRouter.js");
 app.use("/posts", postRouter);
 
-app.get("/home/posts/edit/:username", isLoggedIn, async(req, res)=>{
-    try {
-        const username = req.params.username;
-        if (req.user.username === username) {
-            const editPost = await Post.findOne({username: username});
-            // res.send("hello");
-            // console.log("form data: ", editPost);
-            // res.send(editPost);
-            res.render("editPost.ejs", {editPost});
-        }
-        else {
-            req.flash("error", "You are not the author of this Post...");
-            res.redirect("/home/posts");
-        }
-    }
-    catch(err) {
-        console.log(req.user);
-        res.send('error');
-    }
-});
-app.post("/home/posts/edit/:username", isLoggedIn, async(req, res)=>{
-    // res.send("Post updated");
-    const username = req.params.username;
-    try {
-        if (req.user.username === username) {
-            const Profile = req.body;
-            Profile.username = username;
-            // res.send(Profile);
-            const editPost = await Post.findOne({username: username});
-            await Post.findByIdAndUpdate(editPost._id, Profile);
-            // res.send("hello");
-            // console.log("form data: ", editPost);
-            // res.send(editPost);
-            res.redirect("/home/posts");
-        }
-        else {
-            req.flash("error", "You are not the author of this Post...");
-            res.redirect("/home/posts");
-        }
-    }
-    catch(err) {
-        req.flash("error", "Some thing Wrong happened...");
-        res.redirect("/home/posts");
-    }
-});
 
 app.get("/home/posts/:id", (req, res)=>{
     res.render("show_individual_Posts.ejs");
