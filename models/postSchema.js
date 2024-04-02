@@ -30,6 +30,6 @@ const bloodRequestSchema = new mongoose.Schema({
     }
 });
 
-const BloodRequest = mongoose.model('BloodRequest', bloodRequestSchema);
+const Post = mongoose.model('Post', bloodRequestSchema);
 
-module.exports = BloodRequest;
+module.exports = Post;

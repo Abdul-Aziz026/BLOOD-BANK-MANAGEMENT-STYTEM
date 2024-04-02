@@ -10,8 +10,9 @@ const Post = require("../models/postSchema");
 // show post page...
 router.get("/", async (req, res)=>{
     const posts = await Post.find();
-    const postPicture = process.env.DEFAULT_POST_IMAGE;
-    res.render("posts.ejs", { posts, postPicture });
+    // const postPicture = process.env.DEFAULT_POST_IMAGE;
+    const postUser = req.session.user;
+    res.render("posts.ejs", { posts, postUser });
 });
 
 // create post

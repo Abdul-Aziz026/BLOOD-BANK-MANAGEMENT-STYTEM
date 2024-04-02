@@ -35,7 +35,7 @@
                                     <% for (post of posts) { %>
                                         <tr style="text-align: center;">
                                             <td style="border: 1px solid #c5c0c0;">
-                                                <%= post.username %>
+                                                <%= post.name %>
                                             </td>
                                             <td style="border: 1px solid #c5c0c0;">
                                                 <%=post.bloodGroup %>
@@ -52,11 +52,18 @@
                                             <td style="border: 1px solid #c5c0c0;">
                                                 <%= post.contactNumber%>
                                             </td>
-                                            <form action="/posts">
-                                                <td style="border: 1px solid #c5c0c0;">
-                                                    <button type="submit" class="btn btn-primary">Show Details</button>
-                                                </td>
-                                            </form>
+                                            <% if (post.username==postUser) { %>
+                                                <form action="/posts">
+                                                    <td style="border: 1px solid #c5c0c0;">
+                                                        <button type="submit" class="btn btn-primary">Edit
+                                                            Posts</button>
+                                                    </td>
+                                                </form>
+                                                <% } else {%>
+                                                    <td style="border: 1px solid #c5c0c0;">
+                                                        <button type="submit" class="btn btn-primary"></button>
+                                                    </td>
+                                                    <% } %>
                                         </tr>
                                         <% } %>
                                             <!-- Add more rows for additional blood requests -->
