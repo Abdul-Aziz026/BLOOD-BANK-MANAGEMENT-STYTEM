@@ -16,6 +16,14 @@ const profileSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    role: {
+        type: Number,
+        default: 3
+    },
+    password: {
+        type: String,
+        required: true
+    },
     bloodgroup: {
         type: String,
         enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
@@ -37,6 +45,9 @@ const profileSchema = new mongoose.Schema({
         type: String,
         default: false
     },
+    department: {
+        type: String,
+    },
     division: {
         type: String
     },
@@ -50,15 +61,7 @@ const profileSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    messages: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Message'
-    }],
-    posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
-    }]
+    }
 });
 
 

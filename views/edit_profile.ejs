@@ -8,7 +8,7 @@
                         class="text-center">
                         <b>Edit Profile</b>
                     </h3>
-                    <form action="/home/<%=profile.username%>/edit" method="POST">
+                    <form action="/profile/<%=profile.username%>/edit" method="POST">
                         <div class="form-group mt-3 loginFormStyle">
                             <label for="name"><b>&nbsp;Name:</b></label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="enter name"
@@ -75,6 +75,11 @@
                             <label for="age"><b>&nbsp;Age:</b></label>
                             <input type="number" class="form-control" id="age" name="age" placeholder="enter age"
                                 value=<%=profile.age%>>
+                        </div>
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="department"><b>&nbsp;Department Name:</b></label>
+                            <input type="text" class="form-control" id="department" name="department"
+                                placeholder="enter department" value=<%=profile.department%>>
                         </div>
 
 

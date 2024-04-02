@@ -1,51 +1,78 @@
 <% layout("/layouts/boilerplate.ejs") %>
-    <br> <br> <br>
-    <h3 class="post-header"><b><i>Donate blood today and become a hero</i></b>
-    </h3>
-    <div class="container">
-        <div class="row">
-            <% for (post of posts) { %>
-                <div class="col-sm-12 postOffsetter">
-                    <div class="ownCard">
-                        <p class="card-text"><b>Name:</b>
-                            <%= post.username %>
-                        </p>
-                        <h5 class="card-title">
-                            <b>Title: </b>
-                            <%= post.title %>
-                        </h5>
-                        <p class="card-text"><b>Blood Group:</b>
-                            <%= post.bloodGroup %>
-                        </p>
-                        <p class="card-text"><b>Description:</b>
-                            <%= post.description %>
-                        </p>
-                        <p class="card-text"><b>Patient Type:</b>
-                            <%= post.patientType %>
-                        </p>
-                        <p class="card-text"><b>Phone No:</b>
-                            <%= post.phone %>
-                        </p>
-                    </div>
-                    <!-- <div>
-                        <img class="post-img" src="<%= postPicture %>" alt="Card image cap">
-                    </div> -->
-                    <div class="post-Text-Img">
-                        <div class="Text-Post">
-                            Donate Blood And Be the Reason of <br>For a Smile on someone Face
-                        </div>
-                        <div class="Icon-Post">
-                            <i class="fa-solid fa-heart-pulse"></i>
+
+    <body>
+        <br><br><br>
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <h2 class="card-title">All Blood Requests</h2>
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th
+                                            style="background-color: #BE232B; color: white; border-top-left-radius: 10px;">
+                                            Name
+                                        </th>
+                                        <th style="background-color: #BE232B; color: white;">
+                                            Blood Group</th>
+                                        <th style="background-color: #BE232B; color: white;">
+                                            Units Required</th>
+                                        <th style="background-color: #BE232B; color: white;">
+                                            Patient Type</th>
+                                        <th style="background-color: #BE232B; color: white;">
+                                            Hospital/Clinic</th>
+                                        <th style="background-color: #BE232B; color: white;">
+                                            Contact Number</th>
+                                        <th
+                                            style="background-color: #BE232B; color: white; border-top-right-radius: 10px">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (post of posts) { %>
+                                        <tr style="text-align: center;">
+                                            <td style="border: 1px solid #c5c0c0;">
+                                                <%= post.name %>
+                                            </td>
+                                            <td style="border: 1px solid #c5c0c0;">
+                                                <%=post.bloodGroup %>
+                                            </td>
+                                            <td style="border: 1px solid #c5c0c0;">
+                                                <%=post.unitsRequired%>
+                                            </td>
+                                            <td style="border: 1px solid #c5c0c0;">
+                                                <%= post.patientType %>
+                                            </td>
+                                            <td style="border: 1px solid #c5c0c0;">
+                                                <%= post.hospital%>
+                                            </td>
+                                            <td style="border: 1px solid #c5c0c0;">
+                                                <%= post.contactNumber%>
+                                            </td>
+                                            <% if (post.username==postUser.username) { %>
+                                                <form action="/posts/edit/<%=post._id%>" method="get">
+                                                    <td style="border: 1px solid #c5c0c0;">
+                                                        <button type="submit" class="btn btn-primary">Edit
+                                                            Posts</button>
+                                                    </td>
+                                                </form>
+                                                <% } else {%>
+                                                    <td style="border: 1px solid #c5c0c0;">
+                                                        <button type="submit" class="btn btn-primary"></button>
+                                                    </td>
+                                                    <% } %>
+                                        </tr>
+                                        <% } %>
+                                            <!-- Add more rows for additional blood requests -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <br>
-                <div class="container mt-3 mb-4" style="text-align: center;">
-                    <form action="/home/posts/edit/<%= post.username %>" method="GET">
-                        <button class="btn btn-danger">Edit Post</button>
-                    </form>
-                </div>
-                <hr>
-                <% } %>
-        </div>
-    </div>
+            </div>
+        </section>
+        <br><br><br><br>
+    </body>

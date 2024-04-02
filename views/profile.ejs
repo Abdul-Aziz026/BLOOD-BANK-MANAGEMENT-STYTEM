@@ -23,53 +23,60 @@
                     <p style="padding: 0 25px;" class="card-title mt-1"><strong>Blood Group:</strong>
                         <%= profile.bloodgroup %>
                     </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Weight:</strong>
-                        <%= profile.Weight %>
-                    </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Phone:</strong>
-                        <%= profile.phone %>
-                    </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Gender:</strong>
-                        <%= profile.gender %>
-                    </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Age:</strong>
-                        <%= profile.age %>
-                    </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Donor:</strong>
-                        <%= ( profile.doner=='false' ) ?'No':'Yes' %>
-                    </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Division:</strong>
-                        <%= profile.division %>
-                    </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>District:</strong>
-                        <%= profile.district %>
-                    </p>
-                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Contribution:</strong>
-                        <%= profile.contribution %>
-                    </p>
-                    <br>
-                    <% if (LoggedIn && LoggedIn.username==profile.username) { %>
-                        <form action="/home/<%=profile.username%>/edit" method="GET">
-                            &nbsp; &nbsp; &nbsp;
-                            <button type="submit" class="btn btn-danger mb-3">Edit Profile</button>
-                        </form>
-                        <form action="/home/showmsg/<%=profile.username%>" method="GET">
-                            &nbsp; &nbsp; &nbsp;
-                            <button type="submit" class="btn btn-danger mb-3">Views My Talks</button>
-                        </form>
-                        <% } else { %>
-                            <form action="/home/profile/<%=profile.username%>/message" method="GET">
-                                &nbsp; &nbsp; &nbsp;
-                                <button type="submit" class="btn btn-danger mb-3">Send Message</button>
-                            </form>
-                            <% if (userType && userType=='Admin_Login' ) { %>
-                                <form action="/home/profile/<%=profile.username%>/mail" method="GET">
-                                    &nbsp; &nbsp; &nbsp;
-                                    <button type="submit" class="btn btn-danger mb-3">Send Mail</button>
-                                </form>
+                    <% if (profile.department) { %>
+                        <p style="padding: 0 25px;" class="card-title mt-1"><strong>Department:</strong>
+                            <%= profile.department %>
+                        </p>
+                        <% } %>
+                            <% if (profile.Weight) { %>
+                                <p style="padding: 0 25px;" class="card-title mt-1"><strong>Weight:</strong>
+                                    <%= profile.Weight %>
+                                </p>
                                 <% } %>
-                                    <% } %>
-                                        <br>
+                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Phone:</strong>
+                                        <%= profile.phone %>
+                                    </p>
+                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Gender:</strong>
+                                        <%= profile.gender %>
+                                    </p>
+                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Age:</strong>
+                                        <%= profile.age %>
+                                    </p>
+                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Donor:</strong>
+                                        <%= ( profile.doner=='false' ) ?'No':'Yes' %>
+                                    </p>
+                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Division:</strong>
+                                        <%= profile.division %>
+                                    </p>
+                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>District:</strong>
+                                        <%= profile.district %>
+                                    </p>
+                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Contribution:</strong>
+                                        <%= profile.contribution %>
+                                    </p>
+                                    <br>
+                                    <% if (LoggedIn && LoggedIn.username==profile.username) { %>
+                                        <form action="/profile/<%=profile.username%>/edit" method="GET">
+                                            &nbsp; &nbsp; &nbsp;
+                                            <button type="submit" class="btn btn-danger mb-3">Edit Profile</button>
+                                        </form>
+                                        <form action="/message/<%=profile.username%>" method="GET">
+                                            &nbsp; &nbsp; &nbsp;
+                                            <button type="submit" class="btn btn-danger mb-3">Views My Talks</button>
+                                        </form>
+                                        <% } else { %>
+                                            <form action="/message/<%=profile.username%>/p2" method="GET">
+                                                &nbsp; &nbsp; &nbsp;
+                                                <button type="submit" class="btn btn-danger mb-3">Send Message</button>
+                                            </form>
+                                            <% if (true) { %>
+                                                <form action="/sendMail/<%=profile.username%>" method="GET">
+                                                    &nbsp; &nbsp; &nbsp;
+                                                    <button type="submit" class="btn btn-danger mb-3">Send Mail</button>
+                                                </form>
+                                                <% } %>
+                                                    <% } %>
+                                                        <br>
                 </div>
             </div>
         </div>
