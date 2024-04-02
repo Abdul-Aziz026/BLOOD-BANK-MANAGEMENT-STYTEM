@@ -1,40 +1,35 @@
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+const bloodRequestSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
     },
-    title: {
+    name: {
         type: String,
         required: true
     },
     bloodGroup: {
         type: String,
-        enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
         required: true
     },
-    description: {
-        type: String,
+    unitsRequired: {
+        type: Number,
         required: true
-    },
-    imageLink: {
-        type: String,
     },
     patientType: {
         type: String,
         required: true
     },
-    phone: {
+    hospital: {
         type: String,
         required: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
+    contactNumber: {
+        type: String,
+        required: true
     }
 });
 
-const Post = mongoose.model('Post', postSchema);
+const BloodRequest = mongoose.model('BloodRequest', bloodRequestSchema);
 
-module.exports = Post;
+module.exports = BloodRequest;

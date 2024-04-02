@@ -95,6 +95,11 @@ app.use("/message", messageRouter);
 const mailsendRouter = require("./routes/mailsendRouter.js");
 app.use("/sendMail", mailsendRouter);
 
+
+// post Router
+const postRouter = require("./routes/postRouter.js");
+app.use("/posts", postRouter);
+
 app.get("/home/posts/edit/:username", isLoggedIn, async(req, res)=>{
     try {
         const username = req.params.username;
@@ -139,52 +144,6 @@ app.post("/home/posts/edit/:username", isLoggedIn, async(req, res)=>{
         req.flash("error", "Some thing Wrong happened...");
         res.redirect("/home/posts");
     }
-});
-
-// create post
-app.get("/home/posts/new", isLoggedIn, (req, res)=>{
-    res.render("create_post.ejs");
-});
-
-app.post("/home/posts/new", isLoggedIn, async(req, res)=>{
-    try{
-        const newPost = new Post(req.body);
-        newPost.username = req.user.username;
-        const postMan = await Profile.findOne({username: req.user.username});
-        postMan.posts.push(newPost);
-        // save in Message collection table...
-        const savePost = await newPost.save();
-        // console.log(saveMessage);
-        // save in Profile Collection table...
-        await postMan.save();
-        req.flash("success", "New Post created!!!");
-        res.redirect("/home");
-    }
-    catch(err) {
-        req.flash("error", "Post create failed!!!");
-        res.redirect("/home/posts/new");
-    }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// show post listing...
-app.get("/home/posts", async (req, res)=>{
-    const posts = await Post.find();
-    const postPicture = process.env.DEFAULT_POST_IMAGE;
-    // console.log(posts);
-    res.render("posts.ejs", { posts, postPicture });
 });
 
 app.get("/home/posts/:id", (req, res)=>{

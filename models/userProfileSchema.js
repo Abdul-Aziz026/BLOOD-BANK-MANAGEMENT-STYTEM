@@ -41,6 +41,9 @@ const profileSchema = new mongoose.Schema({
         type: String,
         default: false
     },
+    department: {
+        type: String,
+    },
     division: {
         type: String
     },
