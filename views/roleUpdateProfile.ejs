@@ -1,27 +1,42 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
     <body>
-        <div>
-            Name: <%= profile.name %>
-        </div>
-        <div>
-            Email: <%= profile.email %>
-        </div>
-        <div>
-            <% if(profile.donor) {%>
-                Doner: <%= profile.doner %>
-                    <% } %>
-        </div>
-        <form action="/users/updaterole/<%=profile.username%>" method="post">
+        <br> <br> <br>
+        <div class="container">
+            <h1>User Profile</h1>
             <div>
-                <% if(profile.role==1) { %>
-                    <td>System Admin</td>
-                    <% } else if (profile.role==2) {%>
-                        <td>Volenteer</td>
-                        <% } else if (profile.role==3) {%>
-                            <td>General User</td>
-                            <% } %>
+                <b>Username: <%= user.username %></b>
             </div>
-            <button type="submit">update Role</button>
-        </form>
+            <div>
+                <b>Name: <%= user.name %></b>
+            </div>
+            <div>
+                <b>Email: <%= user.email %></b>
+            </div>
+            <div>
+                <% if(user.donor) { %>
+                    <b>Doner: Yes</b>
+                    <% } else {%>
+                        <b>Doner: No</b>
+                        <% } %>
+            </div>
+            <br>
+            <form action="/users/<%=user.username%>" method="POST">
+                <div class="form-group" style="display: flex;">
+                    <label style="margin-right: 10px; padding: auto;" for="role"><b>Role:</b></label>
+                    <select class="" id="role" name="role" required>
+                        <option value=1 <% if(user.role===1 ) { %>selected<% } %>>System Admin</option>
+                        <option value=2 <% if(user.role===2) { %>selected<% } %>>Volenteer</option>
+                        <option value=3 <% if(user.role===3) { %>selected<% } %>>General User</option>
+                        <!-- Add more options for additional roles -->
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Update Roles.</button>
+            </form>
+            <br>
+            <form action="/users/delete/<%=user.username%>" method="post">
+                <button type="submit" class="btn btn-danger">Delete Profile</button>
+            </form>
+        </div>
     </body>

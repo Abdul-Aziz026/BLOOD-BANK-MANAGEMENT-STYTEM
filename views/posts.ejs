@@ -52,7 +52,7 @@
                                             <td style="border: 1px solid #c5c0c0;">
                                                 <%= post.contactNumber%>
                                             </td>
-                                            <% if (post.username==postUser.username) { %>
+                                            <% if (postUser && post.username==postUser.username) { %>
                                                 <form action="/posts/edit/<%=post._id%>" method="get">
                                                     <td style="border: 1px solid #c5c0c0;">
                                                         <button type="submit" class="btn btn-primary">Edit

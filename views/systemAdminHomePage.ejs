@@ -1,0 +1,119 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body>
+        <br> <br> <br> <br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-header">
+                            System Overview
+                        </div>
+                        <div class="card-body">
+                            <p>Total Registered Accounts: <%= totalAccount %>
+                            </p>
+                            <p>Total System Admins: <%= systemAdmin %>
+                            </p>
+                            <p>Total Volunteers: <%= Volenteer %>
+                            </p>
+                            <p>Total Normal Users: <%= NormalUser %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-header">
+                            User Management
+                        </div>
+                        <div class="card-body">
+                            <a href="/auth/signup" class="btn btn-primary btn-block">Create User</a>
+                            <a href="/users" class="btn btn-secondary btn-block">Show User List</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Post Management
+                        </div>
+                        <div class="card-body">
+                            <p>Total Posts: <%= totalPost %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Blood Donation Statistics
+                        </div>
+                        <div class="card-body">
+                            <p>Successful Blood Donations: <%= successfullDonation%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin: 0 1% 0 1%;">
+            <h2>Blood request pending Post...</h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th style="background-color: #BE232B; color: white; border-top-left-radius: 10px;">
+                                Name
+                            </th>
+                            <th style="background-color: #BE232B; color: white;">
+                                Blood Group</th>
+                            <th style="background-color: #BE232B; color: white;">
+                                Units Required</th>
+                            <th style="background-color: #BE232B; color: white;">
+                                Patient Type</th>
+                            <th style="background-color: #BE232B; color: white;">
+                                Hospital/Clinic</th>
+                            <th style="background-color: #BE232B; color: white;">
+                                Contact Number</th>
+                            <th style="background-color: #BE232B; color: white; border-top-right-radius: 10px">
+                                Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (post of posts) { %>
+                            <tr style="text-align: center;">
+                                <td style="border: 1px solid #c5c0c0;">
+                                    <%= post.name %>
+                                </td>
+                                <td style="border: 1px solid #c5c0c0;">
+                                    <%=post.bloodGroup %>
+                                </td>
+                                <td style="border: 1px solid #c5c0c0;">
+                                    <%=post.unitsRequired%>
+                                </td>
+                                <td style="border: 1px solid #c5c0c0;">
+                                    <%= post.patientType %>
+                                </td>
+                                <td style="border: 1px solid #c5c0c0;">
+                                    <%= post.hospital%>
+                                </td>
+                                <td style="border: 1px solid #c5c0c0;">
+                                    <%= post.contactNumber%>
+                                </td>
+                                <form action="/myhome/approved/<%=post._id%>" method="POST">
+                                    <td>
+                                        <button type="submit" style="color: white; border-radius: 5px; padding: 5px 5px 5px 5px; background-color:
+                                            #BE232B;">
+                                            Approved
+                                        </button>
+                                    </td>
+                                </form>
+                            </tr>
+                            <% } %>
+                                <!-- Add more rows for additional blood requests -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>

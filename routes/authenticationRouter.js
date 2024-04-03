@@ -26,14 +26,13 @@ router.post("/signup", async(req, res)=>{
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         newUser.password = hashedPassword;
         const user = await newUser.save();
-        req.session.user = user;
         req.flash("success", "Signup Successfully!!!");
-        res.redirect("/home");
+        res.redirect("/users");
     }
     catch (err) {
-        // return res.send(err.message);
+        return res.send(err.message);
         req.flash("error", "faliled of signup");
-        res.redirect("/home/signup");
+        res.redirect("/auth/signup");
     }
 });
 

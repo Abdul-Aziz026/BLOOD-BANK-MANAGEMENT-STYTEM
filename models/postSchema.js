@@ -27,6 +27,10 @@ const bloodRequestSchema = new mongoose.Schema({
     contactNumber: {
         type: String,
         required: true
+    },
+    approved: {
+        type: Number,
+        default: 0
     }
 });
 

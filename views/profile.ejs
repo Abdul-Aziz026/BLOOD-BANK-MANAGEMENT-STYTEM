@@ -13,6 +13,15 @@
                     <hr style="border: 1px solid #403e3e;">
                     <h5 style="padding: 0 25px;" class="card-title mt-1">Name: <%= profile.name %>
                     </h5>
+                    <div style="padding: 0 25px;">
+                        <% if (profile.role==1) { %>
+                            <b>Role: </b> Stytem Admin.
+                            <% } else if (profile.role==2) {%>
+                                <b>Role: </b> Volenteer.
+                                <% } else if (profile.role==3) {%>
+                                    <b>Role: </b> General User.
+                                    <% } %>
+                    </div>
                     <p style="padding: 0 25px;" class="card-title mt-1">
                         <strong>Username:</strong>
                         <%= profile.username %>
@@ -29,45 +38,56 @@
                         </p>
                         <% } %>
                             <% if (profile.Weight) { %>
-                                <p style="padding: 0 25px;" class="card-title mt-1"><strong>Weight:</strong>
+                                <p style="padding: 0 25px;" class="card-title mt-1">
+                                    <strong>Weight:</strong>
                                     <%= profile.Weight %>
                                 </p>
                                 <% } %>
-                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Phone:</strong>
+                                    <p style="padding: 0 25px;" class="card-title mt-1">
+                                        <strong>Phone:</strong>
                                         <%= profile.phone %>
                                     </p>
-                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Gender:</strong>
+                                    <p style="padding: 0 25px;" class="card-title mt-1">
+                                        <strong>Gender:</strong>
                                         <%= profile.gender %>
                                     </p>
-                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Age:</strong>
+                                    <p style="padding: 0 25px;" class="card-title mt-1">
+                                        <strong>Age:</strong>
                                         <%= profile.age %>
                                     </p>
-                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Donor:</strong>
+                                    <p style="padding: 0 25px;" class="card-title mt-1">
+                                        <strong>Donor:</strong>
                                         <%= ( profile.doner=='false' ) ?'No':'Yes' %>
                                     </p>
-                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Division:</strong>
+                                    <p style="padding: 0 25px;" class="card-title mt-1">
+                                        <strong>Division:</strong>
                                         <%= profile.division %>
                                     </p>
-                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>District:</strong>
+                                    <p style="padding: 0 25px;" class="card-title mt-1">
+                                        <strong>District:</strong>
                                         <%= profile.district %>
                                     </p>
-                                    <p style="padding: 0 25px;" class="card-title mt-1"><strong>Contribution:</strong>
+                                    <p style="padding: 0 25px;" class="card-title mt-1">
+                                        <strong>Contribution:</strong>
                                         <%= profile.contribution %>
                                     </p>
                                     <br>
                                     <% if (LoggedIn && LoggedIn.username==profile.username) { %>
                                         <form action="/profile/<%=profile.username%>/edit" method="GET">
                                             &nbsp; &nbsp; &nbsp;
-                                            <button type="submit" class="btn btn-danger mb-3">Edit Profile</button>
+                                            <button type="submit" class="btn btn-danger mb-3">Edit
+                                                Profile</button>
                                         </form>
                                         <form action="/message/<%=profile.username%>" method="GET">
                                             &nbsp; &nbsp; &nbsp;
-                                            <button type="submit" class="btn btn-danger mb-3">Views My Talks</button>
+                                            <button type="submit" class="btn btn-danger mb-3">Views My
+                                                Talks</button>
                                         </form>
                                         <% } else { %>
                                             <form action="/message/<%=profile.username%>/p2" method="GET">
                                                 &nbsp; &nbsp; &nbsp;
-                                                <button type="submit" class="btn btn-danger mb-3">Send Message</button>
+                                                <button type="submit" class="btn btn-danger mb-3">Send
+                                                    Message</button>
                                             </form>
                                             <% if (true) { %>
                                                 <form action="/sendMail/<%=profile.username%>" method="GET">

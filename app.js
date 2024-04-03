@@ -1,25 +1,16 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 // boilerplate includer
 const ejsMate = require('ejs-mate');
 const dotenv = require('dotenv');
 dotenv.config();
 const session = require("express-session");
 const flash = require("connect-flash");
-const isLoggedIn = require("./middlewares.js");
 // email sender npm
-const nodemailer = require("nodemailer");
 
-// passport ....
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
 const Profile = require("./models/userProfileSchema.js");
 
 // passport endl
-
-const Post = require("./models/postSchema.js");
-const Message = require("./models/messageSchema.js");
 
 // json data read...
 app.use(express.json());
@@ -54,16 +45,6 @@ app.use(session(sessionOptions));
 // flash....
 app.use(flash());
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(new LocalStrategy(Profile.authenticate()));
-
-passport.serializeUser(Profile.serializeUser());
-passport.deserializeUser(Profile.deserializeUser());
-
-// passport end
-
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
@@ -76,6 +57,7 @@ app.use((req, res, next) => {
         res.locals.LoggedIn = undefined;
         res.locals.roles = 0;
     }
+    // console.log("cur user info ", res.locals.LoggedIn);
     next();
 });
 
@@ -101,6 +83,9 @@ app.use("/posts", postRouter);
 
 const userRouter = require("./routes/userRouter");
 app.use("/users", userRouter);
+
+const systemAdminRouter = require("./routes/systemAdminRouter.js");
+app.use("/myhome", systemAdminRouter);
 
 
 app.get("/home/posts/:id", (req, res)=>{
