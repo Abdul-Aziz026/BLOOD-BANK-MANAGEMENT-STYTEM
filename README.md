@@ -22,6 +22,6 @@ EMAIL_PASSWORD=<email 2nd step verification password>
 
 ## server run command
 ```cpp
-npm start
+node app.js
 ```
 
