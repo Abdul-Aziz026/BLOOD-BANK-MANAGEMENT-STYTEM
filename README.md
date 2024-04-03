@@ -2,7 +2,7 @@
 
 ## git clone code:
 ```cpp
-git clone https://github.com/Abdul-Aziz026/cs24-p2-BSMRSTU_FUSINGBRILLIANCE.git
+git clone https://github.com/Abdul-Aziz026/BLOOD-BANK-MANAGEMENT-STYTEM.git
 ```
 
 ## required install package command
