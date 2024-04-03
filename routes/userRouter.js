@@ -12,6 +12,7 @@ router.get("/", isSystemAdmin, async(req, res)=> {
 router.get("/:username", isSystemAdmin, async(req, res)=>{
     const userName = req.params.username;
     const profile = await Profile.findOne({username: userName});
+    console.log("p = ", profile);
     res.render("roleUpdateProfile.ejs", {profile});
 });
 
