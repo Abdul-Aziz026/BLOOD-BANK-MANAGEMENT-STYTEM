@@ -120,5 +120,5 @@ app.use("*", (req, res)=>{
 
 
 app.listen(8000, ()=>{
-    console.log(`Listening on port 8080, Alhamdulillah...!!!`);
+    console.log(`Listening on port 8000, Alhamdulillah...!!!`);
 });
