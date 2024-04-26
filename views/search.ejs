@@ -1,0 +1,194 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body class="row" style="margin-top: 100px;">
+        <h3 style="margin-left: 5%; color: #A94442">Blood Stock Availability</h3>
+        <div class="mt-4">
+            <form method="post" action="/home/search">
+                <div class="search">
+                    <div style="background-color: #BF2229; color: white; padding: 1rem 1rem;">
+                        Search Blood Stock
+                    </div>
+                    <div class="searchOption">
+                        <select class="form-control form-controll" id="division" name="division">
+                            <option>Select Division</option>
+                            <option value="Barisal">Barisal</option>
+                            <option value="Chittagong">Chittagong</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Khulna">Khulna</option>
+                            <option value="Mymensingh">Mymensingh</option>
+                            <option value="Rajshahi">Rajshahi</option>
+                            <option value="Rangpur">Rangpur</option>
+                            <option value="Sylhet">Sylhet</option>
+                            <!-- Add more division options as needed -->
+                        </select>
+
+                        <select class="form-control form-controll" id="district" name="district">
+                            <option>Select District</option>
+                            <!-- Add more district options as needed -->
+                        </select>
+
+                        <select class="form-control form-controll" id="bloodgroup" name="bloodgroup">
+                            <option>Select Blood Type</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                        </select>
+                    </div>
+                </div>
+                <button style="background-color: #BF2229; color:white;" type="submit"
+                    class="btn searchBtnStyle">Search</button>
+            </form>
+        </div>
+        <div class="search-show">
+            <h5><i class="fa-regular fa-calendar-days"></i> &nbsp;&nbsp;&nbsp;&nbsp; Select Division
+                and/or District for stock
+                availability</h5>
+            <div>
+                <Table class="tableBody">
+                    <thead class="tableHead">
+                        <tr>
+                            <td>Name (Blood)</td>
+                            <td>Contact</td>
+                            <td>Address</td>
+                            <% if (searchUsers && searchUsers.length==0) { %>
+
+
+                                <% } %>
+                        </tr>
+                    </thead>
+                    <% if (searchUsers && searchUsers.length>0) { %>
+                        <% for (user of searchUsers) { %>
+                            <tbody class="tBody">
+                                <tr>
+                                    <td>
+                                        <%if (user.username) {%>
+                                            <a href="/profile/<%=user.username%>" method="GET">
+                                                <%=user.username%>
+                                            </a>
+                                            <% } else {%>
+                                                <%=user.name%>
+                                                    <% } %>
+                                                        (<%= user.bloodgroup %>)
+                                    </td>
+                                    <td>
+                                        <%= user.phone %> ,&nbsp;
+                                            <%= user.email %>
+                                    </td>
+                                    <td>
+                                        District: <%= user.district %>, Division:
+                                            <%= user.division %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <% } %>
+                                <% } else {%>
+                                    <td colspan="3" style="text-align: center;">
+                                        <b>No information Available.</b>
+                                    </td>
+                                    <% } %>
+                </Table>
+            </div>
+        </div>
+
+        <script>
+            const divisionSelect = document.getElementById('division');
+            const districtSelect = document.getElementById('district');
+
+            divisionSelect.addEventListener('change', () => {
+                const selectedDivision = divisionSelect.value;
+                // You can make an AJAX request to fetch subdivisions based on the selected division
+                // For simplicity, I'll just add some dummy subdivisions here
+                if (selectedDivision === 'Barisal') {
+                    districtSelect.innerHTML = `
+          <option value="Barisal">Barisal</option>
+          <option value="Bhola">Bhola</option>
+          <option value="Barguna">Barguna</option>
+          <option value="Jhalokati">Jhalokati</option>
+          <option value="Patuakhali">Patuakhali</option>
+        `;
+                } else if (selectedDivision === 'Chittagong') {
+                    districtSelect.innerHTML = `
+          <option value="Chittagong">Chittagong</option>
+          <option value="Cox's Bazar">Cox's Bazar</option>
+          <option value="Rangamati">Rangamati</option>
+          <option value="Bandarban">Bandarban</option>
+          <option value="Khagrachhari">Khagrachhari</option>
+          <option value="Feni">Feni</option>
+          <option value="Lakshmipur">Lakshmipur</option>
+          <option value="Comilla">Comilla</option>
+          <option value="Noakhali">Noakhali</option>
+          <option value="Brahmanbaria">Brahmanbaria</option>
+          <option value="Chandpur">Chandpur</option>
+        `;
+                } else if (selectedDivision === 'Dhaka') {
+                    districtSelect.innerHTML = `
+          <option value="Dhaka">Dhaka</option>
+          <option value="Narayanganj">Narayanganj</option>
+          <option value="Gazipur">Gazipur</option>
+          <option value="Manikgonj">Manikgonj</option>
+          <option value="Narsingdi">Narsingdi</option>
+          <option value="Faridpur">Faridpur</option>
+          <option value="Gopalgonj">Gopalgonj</option>
+          <option value="Madaripur">Madaripur</option>
+          <option value="Rajbari">Rajbari</option>
+          <option value="Shariatpur">Shariatpur</option>
+        `;
+                } else if (selectedDivision === 'Khulna') {
+                    districtSelect.innerHTML = `
+          <option value="Bagerhat">Bagerhat</option>
+          <option value="Chuadanga">Chuadanga</option>
+          <option value="Jessore">Jessore</option>
+          <option value="Jhenaidah">Jhenaidah</option>
+          <option value="Khulna">Khulna</option>
+          <option value="Kushtia">Kushtia</option>
+          <option value="Magura">Magura</option>
+          <option value="Meherpur">Meherpur</option>
+          <option value="Narail">Narail</option>
+          <option value="Satkhira">Satkhira</option>
+        `;
+                } else if (selectedDivision === 'Mymensingh') {
+                    districtSelect.innerHTML = `
+          <option value="Jamalpur">Jamalpur</option>
+          <option value="Netrokona">Netrokona</option>
+          <option value="Mymensingh">Mymensingh</option>
+          <option value="Sherpur">Sherpur</option>
+        `;
+                } else if (selectedDivision === 'Rajshahi') {
+                    districtSelect.innerHTML = `
+          <option value="Bogra">Bogra</option>
+          <option value="Chapainawabganj">Chapainawabganj</option>
+          <option value="Joypurhat">Joypurhat</option>
+          <option value="Naogaon">Naogaon</option>
+          <option value="Natore">Natore</option>
+          <option value="Pabna">Pabna</option>
+          <option value="Rajshahi">Rajshahi</option>
+          <option value="Sirajganj">Sirajganj</option>
+        `;
+                } else if (selectedDivision === 'Rangpur') {
+                    districtSelect.innerHTML = `
+          <option value="Dinajpur">Dinajpur</option>
+          <option value="Gaibandha">Gaibandha</option>
+          <option value="Lalmonirhat">Lalmonirhat</option>
+          <option value="Nilphamari">Nilphamari</option>
+          <option value="Kurigram">Kurigram</option>
+          <option value="Rangpur">Rangpur</option>
+          <option value="Panchagarh">Panchagarh </option>
+          <option value="Thakurgaon">Thakurgaon</option>
+        `;
+                } else if (selectedDivision === 'Sylhet') {
+                    districtSelect.innerHTML = `
+          <option value="Sylhet">Sylhet</option>
+          <option value="Sunamganj">Sunamganj</option>
+          <option value="Moulvibazar">Moulvibazar</option>
+          <option value="Habiganj">Habiganj</option>
+        `;
+                }
+            });
+        </script>
+
+    </body>

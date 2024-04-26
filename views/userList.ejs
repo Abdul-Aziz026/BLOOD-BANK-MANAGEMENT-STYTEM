@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body>
+        <br> <br> <br>
+        <div class="container">
+            <h1>User List</h1>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (user of users) { %>
+                        <tr>
+                            <td>
+                                <a href="/profile/<%=user.username%>" method="GET">
+                                    <%=user.name%>
+                                </a>
+                            </td>
+                            <td>
+                                <%= user.email %>
+                            </td>
+                            <% if(user.role==1) { %>
+                                <td>System Admin</td>
+                                <% } else if (user.role==2) {%>
+                                    <td>Volenteer</td>
+                                    <% } else if (user.role==3) {%>
+                                        <td>General User</td>
+                                        <% } %>
+                                            <form action="/users/<%=user.username%>" method="GET">
+                                                <td><button class="btn btn-danger">Update Profile</button></td>
+                                            </form>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+    </body>

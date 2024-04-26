@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body>
+        <br> <br> <br>
+        <div class="container">
+            <h1>User Profile</h1>
+            <div>
+                <b>Username: <%= profile.username %></b>
+            </div>
+            <div>
+                <b>Name: <%= profile.name %></b>
+            </div>
+            <div>
+                <b>Email: <%= profile.email %></b>
+            </div>
+            <div>
+                <% if(profile.donor) { %>
+                    <b>Doner: Yes</b>
+                    <% } else {%>
+                        <b>Doner: No</b>
+                        <% } %>
+            </div>
+            <br>
+            <form action="/users/<%=profile.username%>" method="POST">
+                <div class="form-group" style="display: flex;">
+                    <label style="margin-right: 10px; padding: auto;" for="role"><b>Role:</b></label>
+                    <select class="" id="role" name="role" required>
+                        <option value=1 <% if(profile.role===1 ) { %>selected<% } %>>System Admin</option>
+                        <option value=2 <% if(profile.role===2) { %>selected<% } %>>Volenteer</option>
+                        <option value=3 <% if(profile.role===3) { %>selected<% } %>>General User</option>
+                        <!-- Add more options for additional roles -->
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Update Roles.</button>
+            </form>
+            <br>
+            <form action="/users/delete/<%=profile.username%>" method="post">
+                <button type="submit" class="btn btn-danger">Delete Profile</button>
+            </form>
+        </div>
+    </body>

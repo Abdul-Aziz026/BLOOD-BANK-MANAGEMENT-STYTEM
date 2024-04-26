@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body>
+        <br> <br> <br> <br>
+        <p style="text-align: center;"><i class="fa-solid fa-comments"></i>&nbsp;<b>Your Random Message with
+                <%=receiver%>
+            </b>
+        </p>
+        <Table class="messageShowStyle">
+            <Thead style="background-color: #BE232B; color: white;">
+                <tr class="border">
+                    <td class="Author"><i class="fa-solid fa-user"></i>&nbsp; Sender</td>
+                    <td class="Receiver"><i class="fa-solid fa-user"></i>&nbsp; Receiver</td>
+                    <td class="Message"><i class="fa-solid fa-message"></i> &nbsp; Message</td>
+                    <td class="Date"><i class="fa-regular fa-calendar-days"></i> &nbsp; Date</td>
+                </tr>
+            </Thead>
+            <Tbody>
+                <% for (message of betweenMessages) { %>
+                    <tr>
+                        <td class="MessageTableStyle">
+                            <%=message.sender %>
+                        </td>
+                        <td class="MessageTableStyle">
+                            <%=message.receiver %>
+                        </td>
+                        <td style="border: 1px solid rgb(0, 0, 40, 0.3);">
+                            <%=message.message %>
+                        </td>
+                        <td class="MessageTableStyle">
+                            <%=message.createdAt.toISOString().substring(0, 10) %>
+                        </td>
+                    </tr>
+                    <% } %>
+                        <td colspan="4" style="text-align: center;"><b>No More message Available...!!!!</b></td>
+            </Tbody>
+        </Table>
+        <div class="container mt-4 containerrr">
+            <h2>Send Message</h2>
+            <form action="/message/<%=receiver%>/p2" method="POST" class="sendMessageBtn">
+                <div class="form-group">
+                    <!-- <label for="message">Message</label> -->
+                    <textarea class="form-control" id="message" name="message" placeholder="Enter your message" rows="3"
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger mt-3 mb-1">Send Message</button>
+            </form>
+        </div>
+    </body>

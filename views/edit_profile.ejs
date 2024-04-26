@@ -1,0 +1,199 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body style="margin-top: 100px;">
+        <div class=" mt-5 loginStyle" style="background-color: white">
+            <div class=" row justify-content-center">
+                <div>
+                    <h3 style="background-color: #BE232B; color:white;padding: 7px 0px; border: 2px solid gray;"
+                        class="text-center">
+                        <b>Edit Profile</b>
+                    </h3>
+                    <form action="/profile/<%=profile.username%>/edit" method="POST">
+                        <div class="form-group mt-3 loginFormStyle">
+                            <label for="name"><b>&nbsp;Name:</b></label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="enter name"
+                                value=<%=profile.name%> required>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="username"><b>&nbsp;Username:</b></label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="enter username" value=<%=profile.username%> required>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="email"><b>&nbsp;Email:</b></label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="enter email"
+                                value=<%=profile.email%> required>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="password"><b>&nbsp;Password:</b></label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="enter name" value=<%=profile.name%> required>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="bloodgroup"><b>&nbsp;Blood Group:</b></label>
+                            <select class="form-control" id="bloodgroup" name="bloodgroup" required>
+                                <option>
+                                    <%=profile.bloodgroup%>
+                                </option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="weight"><b>&nbsp;Weight(kg):</b></label>
+                            <input type="number" class="form-control" id="weight" name="weight"
+                                placeholder="enter weight" value=<%=profile.weight%>>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="phone"><b>&nbsp;Phone:</b></label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="enter phone no"
+                                value=<%=profile.phone%> required>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="gender"><b>&nbsp;Gender:</b></label>
+                            <select class="form-control" id="gender" name="gender" value=<%=profile.gender%> required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="age"><b>&nbsp;Age:</b></label>
+                            <input type="number" class="form-control" id="age" name="age" placeholder="enter age"
+                                value=<%=profile.age%>>
+                        </div>
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="department"><b>&nbsp;Department Name:</b></label>
+                            <input type="text" class="form-control" id="department" name="department"
+                                placeholder="enter department" value=<%=profile.department%>>
+                        </div>
+
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="division"><b>&nbsp;Division:</b></label>
+                            <select class="form-control" id="division" name="division" required>
+                                <option>
+                                    <%=profile.division%>
+                                </option>
+                                <option>Barisal</option>
+                                <option>Chittagong</option>
+                                <option>Dhaka</option>
+                                <option>Khulna</option>
+                                <option>Rajshahi</option>
+                                <option>Rangpur</option>
+                                <option>Sylhet</option>
+                                <!-- Add more division options as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="district"><b>&nbsp;District:</b></label>
+                            <select class="form-control" id="district" name="district" required>
+                                <option>
+                                    <%=profile.district%>
+                                </option>
+                                <option>Bandarban</option>
+                                <option>Bagherhat
+                                <option>Barguna</option>
+                                <option>Barisal</option>
+                                <option>Bhola</option>
+                                <option>Bogra</option>
+                                <option>Brahmanbaria</option>
+                                <option>Chandpur</option>
+                                <option>Chapainawabganj</option>
+                                <option>Chittagong</option>
+                                <option>Chuadanga</option>
+                                <option>Comilla</option>
+                                <option>Cox's Bazar</option>
+                                <option>Dhaka</option>
+                                <option>Dinajpur</option>
+                                <option>Faridpur</option>
+                                <option>Feni</option>
+                                <option>Gaibandha</option>
+                                <option>Gazipur</option>
+                                <option>Gopalganj</option>
+                                <option>Habiganj</option>
+                                <option>Jamalpur</option>
+                                <option>Jashore</option>
+                                <option>Jhalokati</option>
+                                <option>Jhenaidah</option>
+                                <option>Joypurhat</option>
+                                <option>Khagrachari</option>
+                                <option>Khulna</option>
+                                <option>Kishoreganj</option>
+                                <option>Kurigram</option>
+                                <option>Kushtia</option>
+                                <option>Lakshmipur</option>
+                                <option>Lalmonirhat</option>
+                                <option>Madaripur</option>
+                                <option>Magura</option>
+                                <option>Manikganj</option>
+                                <option>Maulvibazar</option>
+                                <option>Meherpur</option>
+                                <option>Moulvibazar</option>
+                                <option>Munshiganj</option>
+                                <option>Mymensingh</option>
+                                <option>Naogaon</option>
+                                <option>Narail</option>
+                                <option>Narayanganj</option>
+                                <option>Narsingdi</option>
+                                <option>Natore</option>
+                                <option>Netrokona</option>
+                                <option>Nilphamari</option>
+                                <option>Noakhali</option>
+                                <option>Pabna</option>
+                                <option>Panchagarh</option>
+                                <option>Patuakhali</option>
+                                <option>Pirojpur</option>
+                                <option>Rajbari</option>
+                                <option>Rajshahi</option>
+                                <option>Rangamati</option>
+                                <option>Rangpur</option>
+                                <option>Satkhira</option>
+                                <option>Shariatpur</option>
+                                <option>Sherpur</option>
+                                <option>Sirajganj</option>
+                                <option>Sunamganj</option>
+                                <option>Sylhet</option>
+                                <option>Tangail</option>
+                                <option>Thakurgaon</option>
+                                <!-- Add more district options as needed -->
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="contribution"><b>&nbsp;Contribution:</b></label>
+                            <input type="number" class="form-control" id="contribution" name="contribution"
+                                value=<%=profile.contribution%>>
+                        </div>
+                        <!-- 
+                        <div class="form-group mt-2 loginFormStyle">
+                            <label for="profileimage"><b>&nbsp;Profile:</b></label>
+                            <input type="text" class="form-control" id="profileimage" name="profileimage"
+                                placeholder="enter profile image link">
+                        </div> -->
+
+                        <div class="form-group mt-2 form-check loginFormStyle">
+                            <label class="form-check-label" for="donor"><b>Donor Register</b></label>
+                            <input type="checkbox" class="form-check-input" id="donor" name="donor">
+                        </div>
+
+                        <button type="submit" class="btn loginBtn">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>

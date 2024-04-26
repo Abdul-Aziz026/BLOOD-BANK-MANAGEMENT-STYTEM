@@ -1,0 +1,53 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <body style="margin-top: 70px;">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h3 class="text-center mb-4">
+                        <b>Edit Your Post</b>
+                    </h3>
+                    <form action="/posts/edit/<%=editPost._id%>" method="post">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<%= editPost.name %>"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bloodGroup">Blood Group:</label>
+                            <input type="text" class="form-control" id="bloodGroup" name="bloodGroup"
+                                value="<%= editPost.bloodGroup %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="unitsRequired">Units Required:</label>
+                            <input type="number" class="form-control" id="unitsRequired" name="unitsRequired"
+                                value="<%= editPost.unitsRequired %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="patientType">Patient Type:</label>
+                            <input type="text" class="form-control" id="patientType" name="patientType"
+                                value="<%= editPost.patientType %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hospital">Hospital/Clinic:</label>
+                            <input type="text" class="form-control" id="hospital" name="hospital"
+                                value="<%= editPost.hospital %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactNumber">Contact Number:</label>
+                            <input type="tel" class="form-control" id="contactNumber" name="contactNumber"
+                                value="<%= editPost.contactNumber %>" required>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-danger">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
