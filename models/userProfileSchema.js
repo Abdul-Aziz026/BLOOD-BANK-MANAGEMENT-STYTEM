@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// const passportLocalMongoose = require('passport-local-mongoose');
 
 const profileSchema = new mongoose.Schema({
     name: {
@@ -13,7 +12,7 @@ const profileSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: false,
+        required: true,
         unique: true
     },
     role: {
@@ -22,7 +21,7 @@ const profileSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        // required: true
+        required: true
     },
     bloodgroup: {
         type: String,
@@ -59,9 +58,6 @@ const profileSchema = new mongoose.Schema({
         default: 0
     }
 });
-
-
-// profileSchema.plugin(passportLocalMongoose);
 
 const Profile = mongoose.model('Profile', profileSchema);
 

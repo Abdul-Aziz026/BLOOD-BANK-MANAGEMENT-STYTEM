@@ -32,7 +32,6 @@ router.post("/:username", isSystemAdmin, async(req, res)=>{
 router.post("/delete/:username", isSystemAdmin, async (req, res) => {
     try {
         const userName = req.params.username;
-        // return res.send(userName);
         console.log("Username: ", userName); // Corrected variable name
         const deletedProfile = await Profile.findOneAndDelete({ username: userName });
         req.flash("success", "Deleted the user successfully!"); // Removed unnecessary punctuation

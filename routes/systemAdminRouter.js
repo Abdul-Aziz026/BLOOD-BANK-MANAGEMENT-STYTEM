@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router({mergeParams: true});
 
-
 // this is for csv file upload in database...
 const app = express();
 const csv=require('csvtojson')
@@ -94,6 +93,5 @@ router.post('/upload', async (req, res) => {
         }
     });
 });
-
 
 module.exports = router;
