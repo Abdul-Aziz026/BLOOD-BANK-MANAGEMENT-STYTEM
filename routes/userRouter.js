@@ -34,10 +34,16 @@ router.post("/delete/:username", isSystemAdmin, async (req, res) => {
         const userName = req.params.username;
         console.log("Username: ", userName); // Corrected variable name
         const deletedProfile = await Profile.findOneAndDelete({ username: userName });
+        // delete post
+        const Post = require("../models/postSchema");
+        await Post.deleteMany({username: userName});
+        // delete message
+        const Message = require("../models/messageSchema");
+        await Message.deleteMany({ $or: [ { sender: userName }, { receiver: userName } ] });
+
         req.flash("success", "Deleted the user successfully!"); // Removed unnecessary punctuation
         res.redirect("/users");
     } catch (error) {
-        return res.send(error.message);
         req.flash("error", "Failed to delete the user."); // Flash an error message
         res.redirect("/users");
     }
