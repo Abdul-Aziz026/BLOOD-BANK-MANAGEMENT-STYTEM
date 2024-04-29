@@ -135,7 +135,8 @@ app.post("/home/search", async (req, res) => {
 });
 
 app.use("*", (req, res)=>{
-    res.send("404: Page not Found");
+    req.flash("error", "404: Page not Found");
+    res.redirect("/home");
 });
 
 

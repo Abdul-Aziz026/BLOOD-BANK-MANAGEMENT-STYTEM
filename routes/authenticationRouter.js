@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
     // return res.send(req.body);
     try {
         const { username, password } = req.body;
-        console.log(username, password);
+        // console.log(username, password);
         const user = await Profile.findOne({ username: username });
         // console.log("user => ", user);
         if (!user) {
@@ -53,7 +53,6 @@ router.post('/login', async (req, res) => {
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
         // console.log(passwordMatch);
-        console.log(passwordMatch);
         if (!passwordMatch) {
             req.flash("error", "password not matched...!!!");
             return res.redirect("/auth/login");
@@ -65,7 +64,6 @@ router.post('/login', async (req, res) => {
         res.locals.LoggedIn = true;
         req.session.user = user;
         // console.log("user is ===> ", user);
-        console.log("user is ===> ", user);
         req.flash("success", "LoggedIn Successfully...!!!");
         res.redirect("/home");
     } catch (error) {

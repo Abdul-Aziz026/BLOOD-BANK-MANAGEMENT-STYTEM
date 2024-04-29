@@ -46,8 +46,9 @@ router.post("/approved/:id", isSystemAdmin, async(req, res)=>{
 });
 
 router.post('/upload', async (req, res) => {
-    if (!req.files || !req.files.csv) {
-        return res.status(400).send('No files were uploaded.');
+    if (!req.files) {
+        res.redirect("/myhome");
+        // return res.status(400).send('No files were uploaded.');
     }
 
     const csvFile = req.files.csv;
@@ -57,29 +58,40 @@ router.post('/upload', async (req, res) => {
     const tempFilePath = csvFile.name;
     csvFile.mv(tempFilePath, async function(err) {
         if (err) {
-            return res.status(500).send(err);
+            req.flash("error", `${err.message}`);
+            return res.redirect("/myhome");
         }
         try {
             // Convert CSV to JSON
             const jsonObj = await csv().fromFile(tempFilePath);
 
             // Log the JSON object to check its structure
-            console.log(jsonObj);
+            // console.log(jsonObj);
             // Adjust the mapping before saving data to the database
             try {
                 let result = [];
+                let updateUser = 0, notUpdateUser = 0;
                 for (obj of jsonObj) {
-                    const newUser = new Donor(obj);
+                    // console.log(obj.email);
+                    const ExistThisUser = await Donor.find({email: obj.email});
                     // console.log("newUser = ", newUser);
-                    const cur = await newUser.save();
-                    result.push(cur);
+                    if (ExistThisUser) {
+                        notUpdateUser += 1;
+                    }
+                    else {
+                        const newUser = new Donor(obj);
+                        updateUser += 1;
+                        const cur = await newUser.save();
+                        result.push(cur);
+                    }
                 }
-                req.flash("success", "Your CSV file all data update successfully...");
+                let msg = "Your CSV file all data update successfully...";
+                req.flash("success", `${msg} Update User ${updateUser} Not updateuser  ${notUpdateUser}`);
                 // Send success response
                 res.redirect("/myhome");
             } catch (error) {
                 // Log the error
-                req.flash("error", `${error.message}`);
+                req.flash("error", `Hello ${error.message}`);
                 
                 // Send error response
                 res.redirect("/myhome");
