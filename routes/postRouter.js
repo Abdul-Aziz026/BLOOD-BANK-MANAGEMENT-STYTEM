@@ -4,7 +4,6 @@ const router = express.Router({mergeParams: true});
 
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-
 const Post = require("../models/postSchema");
 
 // show post page...
