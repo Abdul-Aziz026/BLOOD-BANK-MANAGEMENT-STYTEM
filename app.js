@@ -36,7 +36,7 @@ app.use(express.urlencoded({extended: true}));
 // mongo connection check
 require("./dataBaseConnectionCheck.js");
 
-// passport middle wares...
+// session middle wares...
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
