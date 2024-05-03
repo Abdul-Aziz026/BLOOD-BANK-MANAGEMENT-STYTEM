@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-const profileSchema = new mongoose.Schema({
+// c++ define type
+const Schema = mongoose.Schema;
+
+const profileSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -40,10 +43,6 @@ const profileSchema = new mongoose.Schema({
     age: {
         type: Number
     },
-    donor: {
-        type: String,
-        default: false
-    },
     department: {
         type: String,
     },
@@ -56,7 +55,22 @@ const profileSchema = new mongoose.Schema({
     contribution: {
         type: Number,
         default: 0
-    }
+    },
+    lastDonateTime: {
+        type: Date,
+    },
+    message: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Message",
+        }
+    ],
+    post: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Post",
+        }
+    ]
 });
 
 const Profile = mongoose.model('Profile', profileSchema);
