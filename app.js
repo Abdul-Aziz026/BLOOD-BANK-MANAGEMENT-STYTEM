@@ -94,45 +94,8 @@ app.use("/users", userRouter);
 const systemAdminRouter = require("./routes/systemAdminRouter.js");
 app.use("/myhome", systemAdminRouter);
 
-
-app.get("/home/posts/:id", (req, res)=>{
-    res.render("show_individual_Posts.ejs");
-});
-
-app.get("/home/search", async(req, res)=>{
-    const searchUsers = await Profile.find({id: ""});
-    res.render("search.ejs", {searchUsers});
-});
-
-const Donor = require("./models/donerSchema.js");
-app.post("/home/search", async (req, res) => {
-    const {division, district, bloodgroup} = req.body;
-    // console.log("data ", division, district, bloodgroup);
-    const searchUsers = await Donor.find({$and: [{
-        bloodgroup: bloodgroup },
-        {
-            $or: [
-            { district: district },
-            { division: division }
-            ]
-        }
-    ]});
-    // registered user...
-    const registerUserSearch = await Profile.find({$and: [{
-        bloodgroup: bloodgroup },
-        {
-            $or: [
-            { district: district },
-            { division: division }
-            ]
-        }
-    ]});
-    for (reg of registerUserSearch) {
-        searchUsers.push(reg);
-    }
-    // console.log(searchUsers);
-    res.render("search.ejs", {searchUsers});
-});
+const searchRouter = require("./routes/searchRouter");
+app.use("/home", searchRouter);
 
 app.use("*", (req, res)=>{
     req.flash("error", "404: Page not Found");

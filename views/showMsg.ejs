@@ -19,13 +19,13 @@
                 <% for (message of betweenMessages) { %>
                     <tr>
                         <td class="MessageTableStyle">
-                            <a href="/home/profile/<%=message.sender%>" method="GET">
+                            <a href="/profile/<%=message.sender%>" method="GET">
                                 <i class="fa-solid fa-user"></i>
                                 <%=message.sender %>
                             </a>
                         </td>
                         <td class="MessageTableStyle">
-                            <a href="/home/profile/<%=message.receiver%>" method="GET">
+                            <a href="/profile/<%=message.receiver%>" method="GET">
                                 <i class="fa-solid fa-user"></i>
                                 <%=message.receiver %>
                             </a>
